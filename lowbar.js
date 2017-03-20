@@ -2,6 +2,8 @@ var _ = {};
 
 // Collections
 
+
+// each *************************************************
 _.each = function (list, func) {
    if (arguments.length !== 2 ) return false;
    if (typeof func!=='function') return false;
@@ -19,6 +21,7 @@ _.each = function (list, func) {
    }
 };
 
+// map *************************************************
 _.map = function (list, func) {
   if (arguments.length !== 2 ) return false;
   if (typeof func!=='function') return false;
@@ -35,11 +38,43 @@ _.map = function (list, func) {
        newArr.push(func(list[item]))
      }
    }
-
    return newArr;
-
 };
 
+// reduce *************************************************
+_.reduce = function (array, func, memo) {
+  if (arguments.length !== 2 ) return false;
+  if (typeof func!=='function') return false;
+  if (!Array.isArray(array)) return false;
+
+  return array.reduce(func, memo);
+};
+
+// filter *************************************************
+_.filter = function (list, func){
+    if(arguments.length !== 2) return false;
+    if (typeof func!=='function') return false;
+    if (typeof list !=='object') return false;
+
+    var newArr =[];
+
+    if(Array.isArray(list)){
+      for(var i=0;i<list.length;i++){
+         if(func(list[i])===true){
+           newArr.push(list[i])
+         }
+      }
+    }
+    else if(typeof list ==='object'){
+      for(var item in list){
+         if(func(list[item])===true){
+           newArr.push(list[item])
+         }
+      }
+    }
+    
+    return newArr;
+}
 
 
 if (typeof module !== 'undefined') {
